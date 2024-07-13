@@ -4,6 +4,7 @@ const app = express();
 const PORT = 8080;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.write("Welcome to GET method");
@@ -139,3 +140,5 @@ app.delete("/tasks/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
 });
+
+module.exports = app;
