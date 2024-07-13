@@ -1,0 +1,14 @@
+{
+  "name": "node_express_1",
+  "version": "1.0.0",
+  "description": "Creating a server with express and implementing CRUD operations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sriram",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
