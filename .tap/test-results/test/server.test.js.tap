@@ -3,50 +3,12 @@ Server is running on port 8080
 # Subtest: POST /tasks
     ok 1 - should be equal
     1..1
-ok 1 - POST /tasks # time=71.556ms
+ok 1 - POST /tasks # time=63.103ms
 
 # Subtest: POST /tasks with invalid data
-    not ok 1 - should be equal
-      ---
-      compare: ===
-      at:
-        fileName: test/server.test.js
-        lineNumber: 22
-        columnNumber: 5
-        typeName: Test
-      stack: |
-        Test.<anonymous> (test/server.test.js:22:5)
-      source: |2
-          };
-          const response = await server.post("/tasks").send(newTask);
-          t.equal(response.status, 400);
-        ----^
-          t.end();
-        });
-      diff: |
-        --- expected
-        +++ actual
-        @@ -1,1 +1,1 @@
-        -400
-        +201
-      ...
-    
+    ok 1 - should be equal
     1..1
-not ok 2 - POST /tasks with invalid data # time=44.332ms
-  ---
-  at:
-    fileName: test/server.test.js
-    lineNumber: 17
-    columnNumber: 5
-    typeName: Object
-  source: |
-    });
-  
-    tap.test("POST /tasks with invalid data", async (t) => {
-    ----^
-      const newTask = {
-        title: "New Task",
-  ...
+ok 2 - POST /tasks with invalid data # time=13.145ms
 
 # Subtest: GET /tasks
     ok 1 - should be equal
@@ -59,80 +21,42 @@ not ok 2 - POST /tasks with invalid data # time=44.332ms
     ok 8 - type is string
     ok 9 - type is boolean
     1..9
-ok 3 - GET /tasks # time=10.518ms
+ok 3 - GET /tasks # time=15.793ms
 
 # Subtest: GET /tasks/:id
     ok 1 - should be equal
     ok 2 - should match pattern
     1..2
-ok 4 - GET /tasks/:id # time=10.76ms
+ok 4 - GET /tasks/:id # time=14.167ms
 
 # Subtest: GET /tasks/:id with invalid id
     ok 1 - should be equal
     1..1
-ok 5 - GET /tasks/:id with invalid id # time=6.73ms
+ok 5 - GET /tasks/:id with invalid id # time=8.598ms
 
 # Subtest: PUT /tasks/:id
     ok 1 - should be equal
     1..1
-ok 6 - PUT /tasks/:id # time=9.318ms
+ok 6 - PUT /tasks/:id # time=9.781ms
 
 # Subtest: PUT /tasks/:id with invalid id
     ok 1 - should be equal
     1..1
-ok 7 - PUT /tasks/:id with invalid id # time=7.101ms
+ok 7 - PUT /tasks/:id with invalid id # time=6.899ms
 
 # Subtest: PUT /tasks/:id with invalid data
-    not ok 1 - should be equal
-      ---
-      compare: ===
-      at:
-        fileName: test/server.test.js
-        lineNumber: 88
-        columnNumber: 5
-        typeName: Test
-      stack: |
-        Test.<anonymous> (test/server.test.js:88:5)
-      source: |2
-          };
-          const response = await server.put("/tasks/1").send(updatedTask);
-          t.equal(response.status, 400);
-        ----^
-          t.end();
-        });
-      diff: |
-        --- expected
-        +++ actual
-        @@ -1,1 +1,1 @@
-        -400
-        +200
-      ...
-    
+    ok 1 - should be equal
     1..1
-not ok 8 - PUT /tasks/:id with invalid data # time=13.758ms
-  ---
-  at:
-    fileName: test/server.test.js
-    lineNumber: 81
-    columnNumber: 5
-    typeName: Object
-  source: |
-    });
-  
-    tap.test("PUT /tasks/:id with invalid data", async (t) => {
-    ----^
-      const updatedTask = {
-        title: "Updated Task",
-  ...
+ok 8 - PUT /tasks/:id with invalid data # time=6.703ms
 
 # Subtest: DELETE /tasks/:id
     ok 1 - should be equal
     1..1
-ok 9 - DELETE /tasks/:id # time=7.908ms
+ok 9 - DELETE /tasks/:id # time=8.106ms
 
 # Subtest: DELETE /tasks/:id with invalid id
     ok 1 - should be equal
     1..1
-ok 10 - DELETE /tasks/:id with invalid id # time=5.582ms
+ok 10 - DELETE /tasks/:id with invalid id # time=8.199ms
 
 1..10

@@ -51,24 +51,29 @@ app.post("/tasks", (req, res) => {
     }
     const response = JSON.parse(data);
     const task = req.body;
-    //console.log(task);
-    const newTask = {
-      id: response.tasks.length + 1,
-      title: task.title,
-      description: task.description,
-      completed: task.completed,
-    };
-    response.tasks.push(newTask);
-    fs.writeFile("task.json", JSON.stringify(response), (err) => {
-      if (err) {
-        res.status(400);
-        res.write("Error in writing file");
-        res.end();
-      } else {
-        res.status(201);
-        res.json(newTask);
-      }
-    });
+    if (!task.title || !task.description) {
+      res.status(400);
+      res.write("Wrong request body. Bad request");
+      res.end();
+    } else {
+      const newTask = {
+        id: response.tasks.length + 1,
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      };
+      response.tasks.push(newTask);
+      fs.writeFile("task.json", JSON.stringify(response), (err) => {
+        if (err) {
+          res.status(400);
+          res.write("Error in writing file");
+          res.end();
+        } else {
+          res.status(201);
+          res.json(newTask);
+        }
+      });
+    }
   });
 });
 
@@ -87,19 +92,25 @@ app.put("/tasks/:id", (req, res) => {
       res.write("Task not found");
       res.end();
     } else {
-      task.title = body.title;
-      task.description = body.description;
-      task.completed = body.completed;
-      fs.writeFile("task.json", JSON.stringify(response), (err) => {
-        if (err) {
-          res.status(400);
-          res.write("Error in writing file");
-          res.end();
-        } else {
-          res.status(200);
-          res.json(task);
-        }
-      });
+      if (typeof body.completed !== "boolean") {
+        res.status(400);
+        res.write("Wrong request body. Bad request");
+        res.end();
+      } else {
+        task.title = body.title;
+        task.description = body.description;
+        task.completed = body.completed;
+        fs.writeFile("task.json", JSON.stringify(response), (err) => {
+          if (err) {
+            res.status(400);
+            res.write("Error in writing file");
+            res.end();
+          } else {
+            res.status(200);
+            res.json(task);
+          }
+        });
+      }
     }
   });
 });
